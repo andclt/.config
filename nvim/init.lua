@@ -12,7 +12,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local lazy_config = require "configs.lazy"
-local helpers = require "custom-helpers"
+local helpers = require("custom-helpers")
 
 -- load plugins
 require("lazy").setup({
@@ -35,7 +35,7 @@ require "nvchad.autocmds"
 
 -- I keep work specific configuration in a private work repo and connect it via symlinks.
 if helpers.isModuleAvailable("stripe") then
-  require "stripe"
+  require("stripe").setup()
 end
 
 vim.schedule(function()
