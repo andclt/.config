@@ -1,12 +1,9 @@
-require "nvchad.mappings"
-
--- add yours here
+vim.g.mapleader = " "
+vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 local map = vim.keymap.set
 
-map("n", ";", ":", { desc = "CMD enter command mode" })
-map("i", "jk", "<ESC>")
-
+-- Add DAP mappings
 -- Nvim DAP
 map("n", "<Leader>dl", "<cmd>lua require'dap'.step_into()<CR>", { desc = "Debugger step into" })
 map("n", "<Leader>dj", "<cmd>lua require'dap'.step_over()<CR>", { desc = "Debugger step over" })
@@ -24,9 +21,10 @@ map("n", "<Leader>dr", "<cmd>lua require'dap'.run_last()<CR>", { desc = "Debugge
 
 -- rustaceanvim
 map("n", "<Leader>dt", "<cmd>lua vim.cmd('RustLsp testables')<CR>", { desc = "Debugger testables" })
--- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+
 -- Go DAP
 map("n", "<Leader>dgt", "<cmd>lua require'dap-go'.debug_test()<CR>", { desc = "Debug go test" })
 map("n", "<Leader>dgl", "<cmd>lua require'dap-go'.debug_last()<CR>", { desc = "Debug last go test" })
+
 -- Gopher
 map("n", "<Leader>gsj", "<cmd>lua vim.cmd('GoTagAdd json')<CR>", { desc = "Add json struct tags" })
