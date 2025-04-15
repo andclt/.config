@@ -18,7 +18,11 @@ return {
             require("gopher").setup(opts)
         end,
         build = function()
-            vim.cmd.GoInstallDeps()
+            if vim.fn.exists(":GoInstallDeps") ~= 0 then
+                vim.cmd.GoInstallDeps()
+            else
+                print("GoInstallDeps command not available. Run it manually")
+            end
         end,
     },
 } 
