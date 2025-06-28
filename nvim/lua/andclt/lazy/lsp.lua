@@ -20,44 +20,31 @@ return {
 
 	config = function()
 		-- Add key mappings for LSP
-		vim.api.nvim_create_autocmd('LspAttach', {
-			group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+		vim.api.nvim_create_autocmd("LspAttach", {
+			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 			callback = function(args)
 				local client = vim.lsp.get_client_by_id(args.data.client_id)
 				local opts = { buffer = args.buf, silent = true }
-				
+
 				-- Go to definition
-				vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+				vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 				-- Go to declaration
-				vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+				vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
 				-- Go to implementation
-				vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+				vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
 				-- Go to type definition
-				vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, opts)
+				vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
 				-- Show hover documentation
-				vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+				vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 				-- Show references
-				vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+				vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
 				-- Show code actions
-				vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
+				vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 				-- Rename symbol
-				vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+				vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 			end,
 		})
 
-		require("conform").setup({
-			formatters_by_ft = {
-				lua = { "stylua" },
-				rust = { "rustfmt" },
-				go = { "gofumpt", "goimports" },
-				typescript = { "prettier" },
-				typescriptreact = { "prettier" },
-			},
-			format_on_save = {
-				timeout_ms = 500,
-				lsp_fallback = true,
-			},
-		})
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
 		local cmp_lsp = require("cmp_nvim_lsp")
@@ -124,7 +111,7 @@ return {
 									-- NOTE: the value should be STRING!!
 									defaultConfig = {
 										indent_style = "space",
-										indent_size = "2",
+										indent_size = "4",
 									},
 								},
 							},
@@ -140,16 +127,38 @@ return {
 							typescript = {
 								format = {
 									enable = true,
+									defaultConfig = {
+										indent_style = "space",
+										indent_size = "4",
+									},
 								},
 							},
 							javascript = {
 								format = {
 									enable = true,
+									defaultConfig = {
+										indent_style = "space",
+										indent_size = "4",
+									},
 								},
 							},
 						},
 					})
 				end,
+			},
+		})
+
+		-- Configure sourcekit-lsp directly since it comes with Xcode
+		require("lspconfig").sourcekit.setup({
+			capabilities = capabilities,
+			filetypes = { "swift" },
+			cmd = { "sourcekit-lsp" },
+			settings = {
+				sourcekit = {
+					diagnostics = {
+						enabled = true,
+					},
+				},
 			},
 		})
 
