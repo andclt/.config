@@ -53,3 +53,19 @@ map("n", "<Leader>dgl", "<cmd>lua require'dap-go'.debug_last()<CR>", { desc = "D
 
 -- Gopher
 map("n", "<Leader>gsj", "<cmd>lua vim.cmd('GoTagAdd json')<CR>", { desc = "Add json struct tags" })
+
+-- Disable arrow kyes
+map("n", "<Up>", "<Nop>", { desc = "Disable Up Arrow" })
+map("n", "<Down>", "<Nop>", { desc = "Disable Down Arrow" })
+map("n", "<Left>", "<Nop>", { desc = "Disable Left Arrow" })
+map("n", "<Right>", "<Nop>", { desc = "Disable Right Arrow" })
+
+map("i", "<Up>", "<Nop>", { desc = "Disable Up Arrow" })
+map("i", "<Down>", "<Nop>", { desc = "Disable Down Arrow" })
+map("i", "<Left>", "<Nop>", { desc = "Disable Left Arrow" })
+map("i", "<Right>", "<Nop>", { desc = "Disable Right Arrow" })
+
+map("v", "<Up>", "<Nop>", { desc = "Disable Up Arrow" })
+map("v", "<Down>", "<Nop>", { desc = "Disable Down Arrow" })
+map("v", "<Left>", "<Nop>", { desc = "Disable Left Arrow" })
+map("v", "<Right>", "<Nop>", { desc = "Disable Right Arrow" })
